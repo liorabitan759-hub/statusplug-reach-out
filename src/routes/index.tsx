@@ -10,7 +10,7 @@ const SMS_URL = `sms:+1${PHONE}`;
 
 const PLANS = [
   { views: "10,000", price: "350", popular: false },
-  { views: "15,000", price: "550", popular: false },
+  { views: "15,000", price: "450", popular: false },
   { views: "25,000", price: "650", popular: true },
 ];
 
