@@ -10,7 +10,7 @@ const SMS_URL = `sms:+1${PHONE}`;
 
 const PLANS = [
   { views: "10,000", price: "350", popular: false },
-  { views: "15,000", price: "550", popular: false },
+  { views: "15,000", price: "450", popular: false },
   { views: "25,000", price: "650", popular: true },
 ];
 
@@ -307,6 +307,46 @@ function Index() {
               <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Post for us */}
+      <section className="border-y border-border/60 bg-card/30">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="inline-block rounded-full bg-primary px-4 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground">
+              Join our network
+            </span>
+            <h2 className="mt-4 text-3xl font-black uppercase tracking-tight sm:text-4xl">
+              Want to post for us?
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Got an active WhatsApp status? Post ads for us and earn. You must
+              have at least <span className="font-bold text-primary">50 views</span> on your
+              WhatsApp status to qualify — then text us to get set up.
+            </p>
+            <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground shadow-[0_0_30px_-6px] shadow-primary transition hover:brightness-110 sm:w-auto"
+              >
+                <Icon name="whatsapp" />
+                Text us to join
+              </a>
+              <a
+                href={SMS_URL}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/50 px-7 py-3.5 text-base font-bold text-primary transition hover:bg-primary/10 sm:w-auto"
+              >
+                <Icon name="phone" />
+                Text {PHONE_DISPLAY}
+              </a>
+            </div>
+            <p className="mt-3 text-sm text-muted-foreground">
+              No 50 views yet? Build your status up and text us when you're ready.
+            </p>
+          </div>
         </div>
       </section>
 
