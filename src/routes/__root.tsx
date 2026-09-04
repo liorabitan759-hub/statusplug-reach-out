@@ -77,21 +77,31 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Status Plug Ads — WhatsApp Status Views That Get You Seen" },
+      {
+        name: "description",
+        content:
+          "Status Plug Ads puts your business in front of a large, engaged WhatsApp community. Real views, real results — 10K, 15K & 25K view packages.",
+      },
+      { name: "author", content: "Status Plug Ads" },
+      {
+        property: "og:title",
+        content: "Status Plug Ads — WhatsApp Status Views That Get You Seen",
+      },
+      {
+        property: "og:description",
+        content:
+          "Real WhatsApp status views from a large, engaged community. 10K, 15K & 25K view packages. More views, more exposure, more sales.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,
