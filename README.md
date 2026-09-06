@@ -2,6 +2,7 @@
 
 Build me a website for what’s app status  25 k views it’s called status plug and  the prices are make it say call or text 5163875207 and also put this https://wa.me/15163875207?text=I%27m%20interested%20in%20buying%20an%20Ad
 
+
 This project was built with [Lovable](https://lovable.dev).
 
 **Live app**: https://statusplug-reach-out.lovable.app
