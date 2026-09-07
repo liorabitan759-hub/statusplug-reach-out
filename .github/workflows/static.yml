@@ -12,16 +12,13 @@ jobs:
       - run: bun run build
       - name: Fix dist
         run: |
-          echo "--- WHERE IS BUILD OUTPUT? ---"
-          ls -la
-          ls -la.output 2>&1 || echo "no.output"
-          ls -la.output/public 2>&1 || echo "no.output/public"
-          ls -la dist 2>&1 || echo "no dist yet"
           mkdir -p dist
-          if [ -d ".output/public" ]; then cp -rv.output/public/* dist/; fi
-          if [ -d "dist/client" ]; then cp -rv dist/client/* dist/ 2>/dev/null; rm -rf dist/client dist/server 2>/dev/null || true; fi
+          ls -la
+          ls -la.output 2>&1 || true
+          ls -la.output/public 2>&1 || true
+          if [ -d ".output/public" ]; then cp -r.output/public/* dist/; fi
+          if [ -d "dist/client" ]; then cp -r dist/client/* dist/; rm -rf dist/client dist/server || true; fi
           touch dist/.nojekyll
-          echo "--- FINAL dist ---"
           ls -la dist
       - uses: actions/upload-pages-artifact@v3
         with:
