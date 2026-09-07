@@ -16,6 +16,7 @@ jobs:
           ls -la
           ls -la.output 2>&1 || true
           ls -la.output/public 2>&1 || true
+          ls -la dist 2>&1 || true
           if [ -d ".output/public" ]; then cp -r.output/public/* dist/; fi
           if [ -d "dist/client" ]; then cp -r dist/client/* dist/; rm -rf dist/client dist/server || true; fi
           touch dist/.nojekyll
