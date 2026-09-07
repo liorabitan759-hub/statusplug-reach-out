@@ -14,19 +14,18 @@ jobs:
       - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2
       - run: bun install
-      - run: bun run build
-      - name: Prepare
+      - name: Build
         run: |
+          bunx vite build || bunx vite build --mode production || npm run build || true
           ls -la
           ls -la dist || true
-          ls -la .output/public || true
-          if [ -f dist/index.html ]; then echo "statusplug.online" > dist/CNAME; cp dist/index.html dist/404.html; echo "OUT=dist" >> $GITHUB_ENV
-          elif [ -f .output/public/index.html ]; then echo "statusplug.online" > .output/public/CNAME; cp .output/public/index.html .output/public/404.html; echo "OUT=.output/public" >> $GITHUB_ENV
-          else echo "statusplug.online" > dist/client/CNAME; cp dist/client/index.html dist/client/404.html; echo "OUT=dist/client" >> $GITHUB_ENV
-          fi
+      - name: Fix for Pages
+        run: |
+          echo "statusplug.online" > dist/CNAME
+          cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.OUT }}
+          path: dist
   deploy:
     runs-on: ubuntu-latest
     needs: build
