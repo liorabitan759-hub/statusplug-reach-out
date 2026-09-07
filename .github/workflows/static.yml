@@ -10,60 +10,38 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Setup Node 24
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-
-      - name: Install
-        run: bun install
-
-      - name: Build
-        run: bun run build --verbose
-
-      - name: Fix for Pages
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bun run build
+      - name: Prepare for Pages
         run: |
-          ls -la
-          if [ -d ".output/public" ]; then
-            echo "statusplug.online" > .output/public/CNAME
-            cp .output/public/index.html .output/public/404.html || true
-            echo "OUTPUT=.output/public" >> $GITHUB_ENV
-          elif [ -d "dist/client" ]; then
-            echo "statusplug.online" > dist/client/CNAME
-            cp dist/client/index.html dist/client/404.html || true
-            echo "OUTPUT=dist/client" >> $GITHUB_ENV
-          else
+          if [ -f dist/index.html ]; then
             echo "statusplug.online" > dist/CNAME
-            cp dist/index.html dist/404.html || true
-            echo "OUTPUT=dist" >> $GITHUB_ENV
+            cp dist/index.html dist/404.html
+            echo "OUT=dist" >> $GITHUB_ENV
+          elif [ -f .output/public/index.html ]; then
+            echo "statusplug.online" > .output/public/CNAME
+            cp .output/public/index.html .output/public/404.html
+            echo "OUT=.output/public" >> $GITHUB_ENV
+          else
+            echo "statusplug.online" > dist/client/CNAME
+            cp dist/client/index.html dist/client/404.html
+            echo "OUT=dist/client" >> $GITHUB_ENV
           fi
-          ls -la $OUTPUT || true
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.OUTPUT }}
+          path: ${{ env.OUT }}
 
   deploy:
+    runs-on: ubuntu-latest
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4
