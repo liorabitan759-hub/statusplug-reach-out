@@ -16,9 +16,8 @@ jobs:
       - run: bun install
       - run: bunx vite build --outDir dist
       - run: |
-          ls dist
           echo "statusplug.online" > dist/CNAME
-          cp dist/index.html dist/404.html || true
+          cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
