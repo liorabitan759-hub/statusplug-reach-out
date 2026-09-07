@@ -20,16 +20,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
       - name: Install dependencies
-        run: bun install
-      - name: Build project
-        run: bun run build
+        run: npm ci
+
+      - name: Build for static
+        run: npx vinxi build --preset static
+
+      - name: Fix for GitHub Pages
+        run: |
+          echo "statusplug.online" > .output/public/CNAME
+          cp .output/public/index.html .output/public/404.html
+          ls -la .output/public
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./.output/public
+          path: .output/public
 
   deploy:
     environment:
