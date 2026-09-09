@@ -1,8 +1,8 @@
-name: Deploy to Pages
+name: Deploy static content to Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -26,11 +26,11 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
       - name: Install
-        run: bun install
+        run: bun install --force
       - name: Build
         run: bun run build
-      - name: List files
-        run: ls -la && ls -la dist || true && ls -la .output || true && ls -la .output/public || true
+      - name: Copy CNAME
+        run: cp CNAME .output/public/CNAME || cp public/CNAME .output/public/CNAME || echo "no cname"
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
