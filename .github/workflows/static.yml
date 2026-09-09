@@ -19,9 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
-      - run: bun install
+      - run: bun install --force
       - run: bun run build
-      - run: ls -la .output/public || ls -la dist
+      - run: cp CNAME .output/public/CNAME || true
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
