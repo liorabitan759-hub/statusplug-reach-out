@@ -1,42 +1,8 @@
-name: Deploy static content to Pages
+import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-      - name: Install
-        run: bun install --force
-      - name: Build
-        run: bun run build
-      - name: Copy CNAME
-        run: cp CNAME .output/public/CNAME || cp public/CNAME .output/public/CNAME || echo "no cname"
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './.output/public'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+export default defineConfig({
+  base: '/',
+  tanstackStart: {
+    server: { entry: "server" },
+  },
+});
