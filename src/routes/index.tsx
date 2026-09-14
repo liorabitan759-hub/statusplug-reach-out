@@ -12,6 +12,8 @@ const PLANS = [
   { views: "10,000", price: "350", popular: false },
   { views: "15,000", price: "450", popular: false },
   { views: "25,000", price: "650", popular: true },
+  { views: "75,000", price: "1200", popular: false },
+  { views: "85,000", price: "1400", popular: false },
 ];
 
 const FEATURES = [
@@ -247,6 +249,25 @@ function Index() {
               </a>
             </div>
           ))}
+        </div>
+
+        {/* Higher views CTA */}
+        <div className="mt-5 rounded-2xl border border-primary/50 bg-primary/5 p-6 text-center">
+          <h3 className="text-xl font-black uppercase tracking-tight sm:text-2xl">
+            Want higher views?
+          </h3>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Need more than 85K views? Message us directly and we'll build a custom package for you.
+          </p>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-bold text-primary-foreground shadow-[0_0_30px_-6px] shadow-primary transition hover:brightness-110"
+          >
+            <Icon name="whatsapp" />
+            PM us for higher views
+          </a>
         </div>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
