@@ -12,6 +12,8 @@ const PLANS = [
   { views: "10,000", price: "350", popular: false },
   { views: "15,000", price: "450", popular: false },
   { views: "25,000", price: "650", popular: true },
+  { views: "75,000", price: "1200", popular: false },
+  { views: "85,000", price: "1400", popular: false },
 ];
 
 const FEATURES = [
